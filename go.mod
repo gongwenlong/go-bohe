@@ -1,4 +1,4 @@
-module go-bohe
+module github.com/gongwenlong/go-bohe
 
 go 1.17
 
