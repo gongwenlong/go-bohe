@@ -2,7 +2,6 @@ package application
 
 import (
 	"context"
-	"fmt"
 	transportGrpc "github.com/gongwenlong/go-bohe/transport/grpc"
 	"github.com/gongwenlong/go-bohe/transport/grpc/middleware"
 	grpcMiddleware "github.com/grpc-ecosystem/go-grpc-middleware"
@@ -15,8 +14,8 @@ import (
 )
 
 type CoreMicroServiceConfig struct {
-	LogLevel string                `yaml:",omitempty"`
-	Grpc     *transportGrpc.Config `yaml:",omitempty"`
+	LogLevel string               `yaml:",omitempty"`
+	Grpc     transportGrpc.Config `yaml:",omitempty"`
 }
 
 type CoreMicroService struct {
@@ -32,8 +31,9 @@ func NewCoreMicroService() *CoreMicroService {
 }
 
 func (c *CoreMicroService) InitGrpcServer(ctx context.Context, process func(grpcServer *transportGrpc.Server) error) error {
-	if c.config.Grpc == nil {
-		return fmt.Errorf("no grpc config set")
+	if c.config.Grpc.Addr == "" {
+		c.config.Grpc.Addr = "127.0.0.1:7881"
+		//return fmt.Errorf("no grpc config set")
 	}
 
 	recoverFunc := func(p interface{}) (err error) {
@@ -45,7 +45,7 @@ func (c *CoreMicroService) InitGrpcServer(ctx context.Context, process func(grpc
 	}
 
 	grpcServer := transportGrpc.NewGrpcServer(
-		*c.config.Grpc,
+		c.config.Grpc,
 		grpcMiddleware.WithUnaryServerChain(
 			grpcRecovery.UnaryServerInterceptor(opts...),
 			apmgrpc.NewUnaryServerInterceptor(apmgrpc.WithRecovery()),
