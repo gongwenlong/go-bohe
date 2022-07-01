@@ -1,10 +1,10 @@
 package application
 
 import (
-	transportGrpc "bohe/transport/grpc"
-	"bohe/transport/grpc/middleware"
 	"context"
 	"fmt"
+	transportGrpc "github.com/gongwenlong/go-bohe/transport/grpc"
+	"github.com/gongwenlong/go-bohe/transport/grpc/middleware"
 	grpcMiddleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpcRecovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
 	"github.com/sirupsen/logrus"

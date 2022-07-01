@@ -1,9 +1,9 @@
 package application
 
 import (
-	"bohe/transport"
 	"context"
 	"fmt"
+	"github.com/gongwenlong/go-bohe/transport"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
 	"os"
