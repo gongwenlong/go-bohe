@@ -1,4 +1,4 @@
-module bohe
+module go-bohe
 
 go 1.17
 
