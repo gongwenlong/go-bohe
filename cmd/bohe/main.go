@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/gongwenlong/go-bohe/cmd/bohe/internal/run"
 	"github.com/spf13/cobra"
-	"go-bohe/cmd/bohe/internal/run"
 	"log"
 )
 
